@@ -106,7 +106,7 @@ fi
 #
 # The full list of supported rubies: https://github.com/sstephenson/ruby-build/tree/master/share/ruby-build
 #
-[ -z $RUBY_VERSION] && RUBY_VERSION="1.9.3-p286"
+[ -z $RUBY_VERSION ] && RUBY_VERSION="1.9.3-p286"
 
 if [ ! -f "$HOME/.rbenv/version" ]; then
   echo "* Installing rbenv"
@@ -116,7 +116,6 @@ if [ ! -f "$HOME/.rbenv/version" ]; then
   git clone git://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build &> /dev/null
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
-  puts "* Installing MRI Ruby 1.9"
   rbenv install $RUBY_VERSION
   rbenv rehash
   RBENV_VERSION=$RUBY_VERSION gem install bundler
@@ -133,6 +132,10 @@ if [ ! -d $WORKDIR ]; then
   echo "* Downloading Deltacloud API source code into $WORKDIR"
   mkdir -p $WORKDIR
   git clone https://git-wip-us.apache.org/repos/asf/deltacloud.git $WORKDIR
+  if [ "x$DELTACLOUD_RELEASE" != "x" ]; then
+      cd $WORKDIR
+      git checkout $DELTACLOUD_RELEASE
+  fi
 fi
 
 echo "* Installing Deltacloud dependencies"

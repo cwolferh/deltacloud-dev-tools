@@ -143,5 +143,9 @@ cd $WORKDIR/server
 rbenv local $RUBY_VERSION
 bundle install
 
+[ -z $DELTACLOUD_PORT ] && DELTACLOUD_PORT=3002
+echo "* Starting up deltacloudd on port $DELTACLOUD_PORT"
+bundle exec bin/deltacloudd -i "mock" -p $DELTACLOUD_PORT&
+
 echo "* Complete! Happy hacking!"
 echo

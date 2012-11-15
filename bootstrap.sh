@@ -108,7 +108,7 @@ fi
 #
 [ -z $RUBY_VERSION ] && RUBY_VERSION="1.9.3-p286"
 
-if [ ! -f "$HOME/.rbenv/version" ]; then
+if [[ "x$SKIP_RBENV_INSTALL" != "xyes" && ! -f "$HOME/.rbenv/version" ]]; then
   echo "* Installing rbenv"
   git clone git://github.com/sstephenson/rbenv.git $HOME/.rbenv &> /dev/null
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
